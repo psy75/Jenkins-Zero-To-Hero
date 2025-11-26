@@ -21,12 +21,12 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://54.166.184.150:9000/"
+        SONAR_URL = "http://100.24.70.169:9000/"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-         // sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
-          sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn -Dsonar.skip=true clean package'
+         sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+          //sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn -Dsonar.skip=true clean package'
         }
       }
     }
